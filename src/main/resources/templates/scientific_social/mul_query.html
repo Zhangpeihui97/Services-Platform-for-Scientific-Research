@@ -1,0 +1,329 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>报表</title>
+
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/fonts/line-icons.css">
+	<link href="/static/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="/static/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="/static/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+
+</head>
+<body>
+	<div class="app header-default side-nav-dark">
+		<div class="layout">
+			<!--顶部栏-->
+			<div th:replace="~{/topbar::topbar}">
+			</div>
+			<!--侧边栏-->
+			<div th:replace="~{/sidebar::sidebar}">
+			</div>
+			<!--主体部分-->
+			<div class="page-container">
+				<form id="queryForm" method="get" action="/sr/mul_result">
+				<div class="main-content">
+					<div class="container-fluid">
+    					<!--左下角上方标题-->
+    					<div class="breadcrumb-wrapper row">
+    						<div class="col-12 col-lg-3 col-md-6">
+    							<h4 class="page-title">综合查询</h4>
+    						</div>
+                    		<button id="mul_query" type="submit" class="btn btn-primary" >
+                                综合查询
+                            </button>
+    					</div>
+    				</div>
+
+				    <div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header border-bottom">
+									<h4 class="card-title">人员查询条件</h4>
+								</div>
+								<div class="card-body">
+									<!--表格table模板-->
+									<div class="table-responsive">
+										<table id="mulQuery_datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+											<tbody>
+												<tr>
+													<td>承担角色</td>
+													<td colspan="3">
+													<div class="container">
+                                                              <div class="radio">
+                                                                <label><input type="radio" name="optradio" id="duty">负责</label>
+                                                              </div>
+                                                              <div class="radio">
+                                                                <label><input type="radio" name="optradio" id="partake">参与</label>
+                                                              </div>
+                                                    </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>人员名称</td>
+                                                    <td>
+						                            	<input type="text" class="form-control" id="name" name="name" style="width:300px; height:40px;" />
+                                                    </td>
+                                                    <td>学科门类</td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select name="subject" class="form-control">
+                                                              <option value="工程与技术科学类">工程与技术科学类</option>
+                                                              <option value="自然科学类">自然科学类</option>
+                                                              <option value="医药科学类">医药科学类</option>
+                                                              <option value="材料科学">材料科学</option>
+                                                              <option value="人文与社会科学类">人文与社会科学类</option>
+                                                           </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>职工号</td>
+                                                    <td>
+							                            <input type="text" class="form-control" id="number" name="number" style="width:300px; height:40px;" />
+                                                    </td>
+                                                    <td>性别</td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select name="sex" class="form-control">
+                                                              <option value="男">男</option>
+                                                              <option value="女">女</option>
+                                                           </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>最后学位</td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select name="degree" class="form-control">
+                                                              <option value="名誉博士">名誉博士</option>
+                                                              <option value="名誉硕士">名誉硕士</option>
+                                                           </select>
+                                                        </div>
+                                                    </td>
+                                                    <td>最后学历</td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select name="academic" class="form-control">
+                                                              <option value="博士研究生">博士研究生</option>
+                                                              <option value="硕士研究生">硕士研究生</option>
+                                                           </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>一级学科</td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select name="firstLevel" class="form-control">
+                                                              <option value="核科学技术">核科学技术</option>
+                                                              <option value="土木建筑工程">土木建筑工程</option>
+                                                              <option value="材料科学">材料科学</option>
+                                                              <option value="临床医学">临床医学</option>
+                                                           </select>
+                                                        </div>
+                                                    </td>
+                                                    <td>政治面貌</td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <select name="politics" class="form-control">
+                                                              <option value="中共党员">中共党员</option>
+                                                              <option value="中共预党">中共预党</option>
+                                                              <option value="共青团员">共青团员</option>
+                                                              <option value="群众">群众</option>
+                                                           </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+													<!--td>
+														<div class="btn-group" role="group">
+															<button id="editDegreeAnalysisTable" class="btn btn-secondary" type="button">
+																编辑
+															</button>
+															<button id="deleteDegreeAnalysisTable" class="btn btn-secondary" type="button">
+																删除
+															</button>
+															<button id="assignForDegreeAnalysisTable" class="btn btn-secondary" type="button">
+																分配权限
+															</button>
+														</div>
+													</td-->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+                    	<div class="col-12">
+                    		<div class="card">
+                    			<div class="card-header border-bottom">
+                    				<h4 class="card-title">项目查询条件</h4>
+                    			</div>
+                    			<div class="card-body">
+                    			    <!--表格table模板-->
+                    			    <div class="table-responsive">
+                    				    <table id="mulQuery_datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    					    <tbody>
+                                            	<tr>
+                                            		<td>审核状态</td>
+                                            		<td colspan="3">
+                                            			<div class="container">
+                                            					<div class="radio">
+                                            						<label><input type="radio" name="optradio" id="duty">通过</label>
+                                            					</div>
+                                            					<div class="radio">
+                                            						<label><input type="radio" name="optradio" id="partake">待审核</label>
+                                            					</div>
+                                            			</div>
+                                            		</td>
+                                            	</tr>
+                                            	<tr>
+                                            		<td>项目编号</td>
+                                            		<td>
+                                            			<input type="text" class="form-control" id="pid" name="pid" style="width:300px; height:40px;" />
+                                            		</td>
+                                            		<td>项目名称</td>
+                                            		<td>
+                                            			<input type="text" class="form-control" id="pnum" name="pnum" style="width:300px; height:40px;" />
+                                            		</td>
+                                            	</tr>
+                                            	<tr>
+                                            		<td>学科分类</td>
+                                            		<td>
+                                            			<div class="form-group">
+                                            				<select name="subject" class="form-control">
+                                            					<option value="工程与技术科学类">工程与技术科学类</option>
+                                            					<option value="自然科学类">自然科学类</option>
+                                            					<option value="医药科学类">医药科学类</option>
+                                            					<option value="材料科学">材料科学</option>
+                                            					<option value="人文与社会科学类">人文与社会科学类</option>
+                                            				</select>
+                                            			</div>
+                                            		</td>
+                                            		<td>一级学科</td>
+                                            		<td>
+                                            			<div class="form-group">
+                                            				<select name="firstLevel" class="form-control">
+                                            					<option value="核科学技术">核科学技术</option>
+                                            					<option value="土木建筑工程">土木建筑工程</option>
+                                            					<option value="材料科学">材料科学</option>
+                                            					<option value="临床医学">临床医学</option>
+                                            				</select>
+                                            			</div>
+                                            		</td>
+                                            	</tr>
+                                            	<tr>
+                                            		<td>主持单位</td>
+                                            		<td>
+                                            			<input type="text" class="form-control" id="units" name="units" style="width:300px; height:40px;" />
+                                            		</td>
+                                            		<td>经费（万元）</td>
+                                            		<td>
+                                            			<div class="form-group">
+                                            				<select name="funds" class="form-control">
+                                            					<option value="<=20"><=20</option>
+                                            					<option value="<=50"><=50</option>
+                                                                <option value="<=100"><=100</option>
+                                            					<option value=">100">>100</option>
+                                            					</select>
+                                            			</div>
+                                            		</td>
+                                            	</tr>
+                                            	<tr>
+                                           		<td>项目类别</td>
+                                            		<td>
+                                            			<div class="form-group">
+                                            				<select name="classification" class="form-control">
+                                            					<option value="国家级">国家级</option>
+                                            					<option value="省部级">省部级</option>
+                                            				</select>
+                                            			</div>
+                                            		</td>
+                                            		<td>项目成果</td>
+                                            		<td>
+                                            			<div class="form-group">
+                                            				<select name="presult" class="form-control">
+                                            					<option value="专利成果">专利成果</option>
+                                            					<option value="著作权">著作权</option>
+                                            					<option value="论文期刊">论文期刊</option>
+                                            					<option value="成品展示">成品展示</option>
+                                            				</select>
+                                            			</div>
+                                            		</td>
+                                            	</tr>
+                                            </tbody>
+                                        </table>
+                    			    </div>
+                    			</div>
+                    		</div>
+                    	</div>
+                    </div>
+				    </div>
+
+					<footer class="content-footer">
+						<div th:replace="~{/footer::footer}"></div>
+					</footer>
+
+				</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	<script src="/static/js/jquery-min.js"></script>
+	<script src="/static/js/popper.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/scripts.js"></script>
+	<script src="/static/js/jquery.app.js"></script>
+	<script src="/static/js/main.js"></script>
+
+	<script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="/static/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<script src="/static/plugins/datatables/dataTables.buttons.min.js"></script>
+	<script src="/static/plugins/datatables/buttons.bootstrap4.min.js"></script>
+	<script src="/static/plugins/datatables/jszip.min.js"></script>
+	<script src="/static/plugins/datatables/pdfmake.min.js"></script>
+	<script src="/static/plugins/datatables/vfs_fonts.js"></script>
+	<script src="/static/plugins/datatables/buttons.html5.min.js"></script>
+	<script src="/static/plugins/datatables/buttons.print.min.js"></script>
+	<script src="/static/plugins/datatables/buttons.colVis.min.js"></script>
+
+	<script src="/static/plugins/datatables/dataTables.responsive.min.js"></script>
+	<script src="/static/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+	<script src="/static/js/datatables.init.js"></script>
+
+	<script type="text/javascript">
+        function f() {
+            var formData = new FormData($('#queryForm')[0]);
+            $.ajax({
+                url:"/sr/mul_result",
+                type:"post",
+                data:formData,
+                processData:false,
+                contentType:false,
+                success:function (result) {
+                    if (result && result.success) {
+                        alert("提交成功");
+                        // window.location.href = "/project/list";
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+            return false;
+        }
+	</script>
+	</body>
+	</html>

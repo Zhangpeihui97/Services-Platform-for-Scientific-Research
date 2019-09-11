@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>hello thymeleaf</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+
+<div>
+    <h th:text="${name}">name123</h>
+
+    <a href="www.baidu.com" th:text="${name}">baidu</a>
+    <br>
+    <dl>
+    <dt>username:</dt>
+        <dd th:text="${user.name}">name</dd>
+        <dt>id:</dt>
+        <dd th:text="${user.id}">id</dd>
+    </dl>
+    <dl th:object="${user}">
+        <dt>username:</dt>
+        <dd th:text="*{name}">name</dd>
+        <dt>id:</dt>
+        <dd th:text="*{id}">id</dd>
+    </dl>
+    <p></p>
+    <li th:each="mes:${messages}">
+        <br><label th:text="${mes}">mes0</label>
+    </li>
+</div>
+
+<div>
+    <a href="/app/test">unknowLink</a>
+</div>
+
+</body>
+
+</html>

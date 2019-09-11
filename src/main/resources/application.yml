@@ -1,0 +1,5 @@
+#different environment EG dev for dev，test for test pro for product
+
+spring:
+  profiles:
+    active: dev

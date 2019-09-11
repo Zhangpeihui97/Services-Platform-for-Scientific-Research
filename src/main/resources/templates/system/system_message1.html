@@ -1,0 +1,109 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>高校科研创新服务平台</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/fonts/line-icons.css">
+    <link href="/static/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+</head>
+<body>
+<div class="app header-default side-nav-dark">
+    <div class="layout">
+        <!--顶部栏-->
+        <div th:replace="~{/topbar::topbar}">
+        </div>
+        <!--侧边栏-->
+        <div th:replace="~{/sidebar::sidebar}">
+        </div>
+        <!--主体部分-->
+        <div class="page-container">
+
+            <div class="main-content">
+                <div class="container-fluid">
+
+                    <div class="breadcrumb-wrapper row">
+                        <!--
+                        <div class="col-12 col-lg-9 col-md-6">
+                            <ol class="breadcrumb float-right">
+                                <li><a href="#">Tables</a></li>
+                                <li class="active"> / Data Table</li>
+                            </ol>
+                        </div>
+                        -->
+                    </div>
+
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 style="text-align:center" th:text="${mes.title}">科研管理系统提醒：项目中检材料已上传，请尽快审阅</h4>
+                                    <br>
+                                    <p th:text="${mes.content}">您好，20190701项目《基于卷积网的人脸识别》中检材料已上传，请尽快审阅。</p>
+                                    <div class="row">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-1">
+                                            <div class="btn-group" role="group">
+                                                <button  type="button" class="btn btn-common"><a th:href="@{'/system/sys_message_rm?id='+${mes.id}}" style="color: white">删除</a></button>
+                                                <button  type="button" class="btn btn-common"><a href="/system/system_message" style="color: white">返回</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <footer class="content-footer">
+                    <div th:replace="~{/footer::footer}"></div>
+                </footer>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/static/js/jquery-min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+<script src="/static/js/jquery.app.js"></script>
+<script src="/static/js/main.js"></script>
+
+<script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/static/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/static/plugins/datatables/jszip.min.js"></script>
+<script src="/static/plugins/datatables/pdfmake.min.js"></script>
+<script src="/static/plugins/datatables/vfs_fonts.js"></script>
+<script src="/static/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/static/plugins/datatables/buttons.print.min.js"></script>
+<script src="/static/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/static/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<script src="/static/js/datatables.init.js"></script>
+
+<script type="text/javascript">
+    // $('header navbar').load('/static/head.html',function(responseTxt,statusTxt,xhr){
+    //        console.log('responseTxt,statusTxt,xhr');
+    // 		}
+    // )
+</script>
+</body>
+</html>

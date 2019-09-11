@@ -1,0 +1,145 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>审核科研人员列表</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/fonts/line-icons.css">
+    <link href="/static/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+
+</head>
+<body>
+<div class="app header-default side-nav-dark">
+    <div class="layout">
+        <!--顶部栏-->
+        <div th:replace="~{/topbar::topbar}">
+        </div>
+        <!--侧边栏-->
+        <div th:replace="~{/sidebar::sidebar}">
+        </div>
+        <!--主体部分-->
+        <div class="page-container">
+
+            <div class="main-content">
+                <div class="container-fluid">
+
+                    <div class="breadcrumb-wrapper row">
+                        <div class="col-12 col-lg-3 col-md-6">
+                            <h4 class="page-title">审核科研人员</h4>
+                        </div>
+                        <!--
+                        <div class="col-12 col-lg-9 col-md-6">
+                            <ol class="breadcrumb float-right">
+                                <li><a href="#">Tables</a></li>
+                                <li class="active"> / Data Table</li>
+                            </ol>
+                        </div>
+                        -->
+                    </div>
+
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <span class="badge badge-default">审核科研人员列表</span>
+                                    <div class="row">
+                                        <div class="col-md-10"></div>
+                                        <button type="button" class="btn btn-common"><a href="/admin/user/list" style="color: white">返回</a></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <!--<th>#</th>-->
+                                                <th>id</th>
+                                                <th>姓名</th>
+                                                <!--<th>id</th>-->
+                                                <th>角色</th>
+                                                <th>账户</th>
+                                                <th>审核状态</th>
+                                                <th width="130px">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="user:${list}">
+                                                <!--<td >1</td>-->
+                                                <td th:text="${user.id}">0001</td>
+                                                <td th:text="${user.name}">张三</td>
+                                                <!--<td th:text="${user.id}">0001</td>-->
+                                                <td th:text="${user.role}">1 科研人员</td>
+                                                <td th:text="${user.account}">1243214</td>
+                                                <td th:text="${user.state}">未审核</td>
+                                                <td>
+                                                    <a th:href="@{'/admin/user/audit?id='+${user.id}+'&&audit=yes'}">
+                                                        <button type="button" class="btn">通过</button>
+                                                    </a>
+                                                    <a th:href="@{'/admin/user/audit?id='+${user.id}+'&&audit=no'}">
+                                                        <button type="button" class="btn">不通过</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <footer class="content-footer">
+                    <div th:replace="~{/footer::footer}"></div>
+                </footer>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/js/jquery-min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+<script src="/static/js/jquery.app.js"></script>
+<script src="/static/js/main.js"></script>
+
+<script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/static/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/static/plugins/datatables/jszip.min.js"></script>
+<script src="/static/plugins/datatables/pdfmake.min.js"></script>
+<script src="/static/plugins/datatables/vfs_fonts.js"></script>
+<script src="/static/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/static/plugins/datatables/buttons.print.min.js"></script>
+<script src="/static/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/static/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<script src="/static/js/datatables.init.js"></script>
+
+<script type="text/javascript">
+    // $('header navbar').load('/static/head.html',function(responseTxt,statusTxt,xhr){
+    //        console.log('responseTxt,statusTxt,xhr');
+    // 		}
+    // )
+</script>
+</body>
+</html>

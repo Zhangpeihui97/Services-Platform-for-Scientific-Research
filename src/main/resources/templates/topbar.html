@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<div class="header navbar" th:fragment="topbar">
+				<div class="header-container">
+					<!--左上角logo-->
+					<div class="nav-logo">
+						<a href="/home">
+							<b><img src="/static/img/logo.png" alt=""></b>
+							<span class="logo">
+								<img src="/static/img/logo-text.png" alt="">
+							</span>
+						</a>
+					</div>
+					<!--头部导航左边折叠、展开按钮-->
+					<ul class="nav-left">
+						<li>
+							<a class="sidenav-fold-toggler" href="javascript:void(0);">
+								<i class="lni-menu"></i>
+							</a>
+							<a class="sidenav-expand-toggler" href="javascript:void(0);">
+								<i class="lni-menu"></i>
+							</a>
+						</li>
+					</ul>
+					<!--头部导航右边搜索框,头像，下拉菜单-->
+					<ul class="nav-right">
+						<li class="search-box">
+							<input class="form-control" type="text" placeholder="Type to search...">
+							<i class="lni-search"></i>
+						</li>
+						<!--右上角登录头像，下拉菜单-->
+						<li class="user-profile dropdown dropdown-animated scale-left">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<img class="profile-img img-fluid" src="/static/img/avatar/avatar.jpg" alt="">
+							</a>
+							<ul class="dropdown-menu dropdown-md">
+								<li>
+									<ul class="list-media">
+										<li class="list-item avatar-info">
+											<div class="media-img">
+												<img src="/static/img/avatar/avatar.jpg" alt="">
+											</div>
+											<div class="info">
+												<span class="title text-semibold">lgx</span>
+												<span class="sub-title">UI/UX Desinger</span>
+											</div>
+										</li>
+									</ul>
+								</li>
+								<li role="separator" class="divider"></li>
+								<!--下拉菜单href待定-->
+								<li>
+									<a th:href="@{'/user_edit_page?id='+${token}}" href="/user_edit_page?id=-1">
+										<i class="lni-cog"></i>
+										<span>个人信息修改</span>
+									</a>
+								</li>
+								<li>
+									<a href="/login">
+										<i class="lni-lock"></i>
+										<span>Logout</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+</body>
+</html>

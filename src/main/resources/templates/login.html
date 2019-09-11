@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>高校科研创新服务平台</title>
+
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/fonts/line-icons.css">
+	<link href="/static/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="/static/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="/static/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+
+</head>
+<body>
+<div class="app header-default side-nav-dark">
+	<div class="layout">
+		<!--顶部栏-->
+		<div th:replace="~{/topbar::topbar}">
+		</div>
+		<!--侧边栏-->
+		<div th:replace="~{/sidebar::sidebar}">
+		</div>
+		<!--主体部分-->
+		<div class="page-container">
+
+			<div class="main-content">
+				<div class="container-fluid">
+
+					<div class="breadcrumb-wrapper row">
+						<div class="col-12 col-lg-3 col-md-6">
+							<!--<h4 class="page-title">登录</h4>-->
+						</div>
+						<!--
+                        <div class="col-12 col-lg-9 col-md-6">
+                            <ol class="breadcrumb float-right">
+                                <li><a href="#">Tables</a></li>
+                                <li class="active"> / Data Table</li>
+                            </ol>
+                        </div>
+                        -->
+					</div>
+
+				</div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header border-bottom">
+									<span class="badge badge-default">用户登录</span>
+								</div>
+								<div class="card-body">
+									<form role="form" id="loginForm" method="post" onsubmit="return login()">
+										<div class="form-group">
+
+											<label for="account">
+												账号
+											</label>
+											<input type="text" class="form-control" id="account" name="account" style="width: 200px"/>
+										</div>
+										<div class="form-group">
+
+											<label for="password">
+												密码
+											</label>
+											<input type="password" class="form-control" id="password" name="password"style="width: 200px"/>
+										</div>
+										<div class="checkbox">
+
+											<label>
+												<input type="checkbox" /> Check me out
+											</label>
+										</div>
+										<button type="submit" class="btn btn-common" onclick="check()">
+											登录
+										</button>
+										<button type="button" class="btn"><a href="signup" style="color: black">注册</a></button>
+									</form>
+									<a id="modal-394224" href="#modal-container-394224" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<footer class="content-footer">
+					<div th:replace="~{/footer::footer}"></div>
+				</footer>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<script src="/static/js/jquery-min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+<script src="/static/js/jquery.app.js"></script>
+<script src="/static/js/main.js"></script>
+
+<script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/static/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/static/plugins/datatables/jszip.min.js"></script>
+<script src="/static/plugins/datatables/pdfmake.min.js"></script>
+<script src="/static/plugins/datatables/vfs_fonts.js"></script>
+<script src="/static/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/static/plugins/datatables/buttons.print.min.js"></script>
+<script src="/static/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/static/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<script src="/static/js/datatables.init.js"></script>
+
+<script type="text/javascript">
+    // 直接以表单提交，这种还有直接的表单提交都是可以接收到的
+    function login(){
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/login",
+            data: $('#loginForm').serialize(),
+            success: function (result) {
+                if (result && result.success) {
+                    window.location.href = "/home";
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+        return false;
+    }
+    function check(){
+        var username = $('#username').val();
+        var password = $('#password').val();
+        if(username.length>13||username.length<3){
+            alert(账号应该在3到13位的长度之间)
+            //todo 账号密码格式的验证
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

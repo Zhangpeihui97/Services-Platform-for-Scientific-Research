@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>到款新增</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/fonts/line-icons.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+
+
+</head>
+<body>
+<div class="app header-default side-nav-dark">
+    <div class="layout">
+        <!--顶部栏-->
+        <div th:replace="~{/topbar::topbar}">
+        </div>
+        <!--侧边栏-->
+        <div th:replace="~{/sidebar::sidebar}">
+        </div>
+        <!--主体部分-->
+        <div class="page-container">
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="card-title">新增到款</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-description">
+                                        到账项目:
+                                    </p>
+                                    <form class="forms-sample" id="form" onsubmit="return f()">
+                                        <div class="form-inline">
+                                            <select name="pId">
+                                                <option th:each="project:${pLIst}" th:value="${project.id}"
+                                                        th:text="${project.name}">xxx
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-inline">
+                                            <label for="InputName1">来款单位</label>
+                                            <p style="padding:10px;"></p>
+                                            <input type="text" class="form-control" id="InputName1"
+                                                   style="width:200px; height:30px;" name="paymentUnit">
+                                        </div>
+
+                                        <div class="form-inline">
+                                            <div class="form-group"><label for="InputNumber">到款金额</label>
+                                                <p style="padding:10px;"></p>
+                                                <input type="text" class="form-control" id="InputNumber"
+                                                       style="width:100px; height:30px;" name="money">
+                                                <div class="input-group-addon">万元</div>
+                                            </div>
+                                            <p style="padding:50px;"></p>
+                                            <div class="form-group"><label for="InputDate">到款日期</label>
+                                                <p style="padding:10px;"></p>
+                                                <input type="date" class="form-control" id="InputDate"
+                                                       style="width:150px; height:30px;" name="date">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-b-20">
+                                            <label for="Textarea1">备注</label>
+                                            <textarea class="form-control" id="Textarea1" rows="4"
+                                                      style="width:300px; height:80px;"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-common mr-3">保存</button>
+                                        <button class="btn btn-light">返回</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="content-footer">
+                <div th:replace="~{/footer::footer}"></div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/js/jquery-min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery.app.js"></script>
+<script src="/static/js/main.js"></script>
+<script type="text/javascript">
+    function f() {
+        var formData = new FormData($('#form')[0]);
+        $.ajax({
+            url: "/admin/fund/fund_add",
+            type: "post",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                if (result && result.success) {
+                    alert("提交成功");
+                    window.location.href = "/admin/fund/fund_list";
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+        return false;
+    }
+</script>
+
+</body>
+
+
+</html>

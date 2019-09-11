@@ -1,0 +1,24 @@
+#for coding
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: lgx
+    password: 123456
+    url: jdbc:mysql://192.168.162.27:3306/resplayform?useSSL=false&characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: utf-8
+    cache: false
+    check-template-location: true
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.research.model.Vo

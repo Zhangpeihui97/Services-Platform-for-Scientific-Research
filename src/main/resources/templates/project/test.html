@@ -1,0 +1,167 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>报表</title>
+
+	<link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/assets/fonts/line-icons.css">
+	<link href="/static/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="/static/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="/static/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="/static/assets/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/static/assets/css/responsive.css">
+
+</head>
+<body>
+	<div class="app header-default side-nav-dark">
+		<div class="layout">
+			<!--顶部栏-->
+			<div th:replace="~{/topbar::topbar}">
+			</div>
+			<!--侧边栏-->
+			<div th:replace="~{/sidebar::sidebar}">
+			</div>
+			<!--主体部分-->
+			<div class="page-container">
+
+				<div class="main-content">
+					<div class="container-fluid">
+
+						<div class="breadcrumb-wrapper row">
+							<div class="col-12 col-lg-3 col-md-6">
+								<h4 class="page-title">合同信息一览表</h4>
+							</div>
+							<!--
+							<div class="col-12 col-lg-9 col-md-6">
+								<ol class="breadcrumb float-right">
+									<li><a href="#">Tables</a></li>
+									<li class="active"> / Data Table</li>
+								</ol>
+							</div>
+							-->
+						</div>
+
+					</div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-8">
+								<span class="badge badge-default">项目变更申请</span>
+								<br>
+								<br>
+								<form role="form">
+									<div class="form-group">
+
+										<label for="projectname">
+											项目名称
+										</label>
+										<input type="name" class="form-control" id="projectname" name="projectname" style="width:300px; height:40px;" />
+									</div>
+									<div class="form-group">
+
+										<label for="projectid">
+											项目编号
+										</label>
+										<input type="id" class="form-control" id="projectid" name="projectid" style="width:300px; height:40px;" />
+									</div>
+									<div class="form-group">
+
+										<label for="projectleader">
+											负责人
+										</label>
+										<input type="name" class="form-control" id="projectleader" name="projectleader"style="width:300px; height:40px;" />
+									</div>
+									<div class="form-group">
+
+										<label for="projectteam">
+											成员
+										</label>
+										<input type="name" class="form-control" id="projectteam" name="projectteam"style="width:300px; height:40px;" />
+									</div>
+									<div class="form-group">
+
+										<label for="budget">
+											项目预算
+										</label>
+										<input type="name" class="form-control" id="budget" name="budget" style="width:300px; height:40px;" />
+									</div>
+									<div class="form-group">
+
+										<label for="units">
+											所属单位
+										</label>
+										<input type="name" class="form-control" id="units" name="units" style="width:300px; height:40px;" />
+									</div>
+									<div class="form-group">
+
+										<label for="exampleInputPassword1">
+											项目级别
+										</label>
+										<select>
+											<option value="院级">院级</option>
+											<option value="校级">校级</option>
+											<option value="省级">省级</option>
+											<option value="国家级">国家级</option>
+										</select>
+									</div>
+									<div class="form-group">
+
+										<label for="InputFile">
+											项目文档
+										</label>
+										<input type="file" class="form-control-file" id="InputFile" name="InputFile"/>
+
+									</div>
+
+									<button type="submit" class="btn btn-primary">
+										Submit
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+					<footer class="content-footer">
+						<div th:replace="~{/footer::footer}"></div>
+					</footer>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="/static/assets/js/jquery-min.js"></script>
+	<script src="/static/js/popper.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/assets/js/scripts.js"></script>
+	<script src="/static/assets/js/jquery.app.js"></script>
+	<script src="/static/assets/js/main.js"></script>
+
+	<script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="/static/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<script src="/static/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+	<script src="/static/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+	<script src="/static/assets/plugins/datatables/jszip.min.js"></script>
+	<script src="/static/assets/plugins/datatables/pdfmake.min.js"></script>
+	<script src="/static/assets/plugins/datatables/vfs_fonts.js"></script>
+	<script src="/static/assets/plugins/datatables/buttons.html5.min.js"></script>
+	<script src="/static/assets/plugins/datatables/buttons.print.min.js"></script>
+	<script src="/static/assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+	<script src="/static/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+	<script src="/static/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+	<script src="/static/assets/js/datatables.init.js"></script>
+	
+	<script type="text/javascript">
+	// $('header navbar').load('/static/head.html',function(responseTxt,statusTxt,xhr){
+     //        console.log('responseTxt,statusTxt,xhr');
+	// 		}
+	// )
+	</script>
+	</body>
+	</html>

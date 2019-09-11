@@ -1,0 +1,25 @@
+2_科研统计
+2.1_科技统计
+    @RequestMapping("basic")//科技统计基础表
+    public  String basic(){return "scientific_basic";}
+    @RequestMapping("summary")//科技统计汇总表
+    public  String summary(){return "scientific_summary";}
+2.2_社科统计
+    @RequestMapping("s_basic")//社科统计基础表
+    public  String sbasic(){return "social_basic";}
+    @RequestMapping("s_summary")//社科统计汇总表
+    public  String ssummary(){return "social_summary";}
+
+
+3_评估决策
+3.1_科研报表    
+    @RequestMapping("sci")//科研报表
+    public String sci(){return "scientific_reports";}
+    @RequestMapping("contract")//合同一览表
+    public String contract(){return "contract_info";}
+3.2_综合查询
+    @RequestMapping("mul_query")//综合插叙条件
+    public String mulQuery(){return "mul_query";}
+    @RequestMapping("mul_result")//综合查询结果
+    public String mulResult(){return "mul_result";}
+

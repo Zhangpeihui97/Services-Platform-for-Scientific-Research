@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.research.dao.SocStatisticMapper" >
+  <resultMap id="BaseResultMap" type="com.research.model.Vo.SocStatistic" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="institution" property="institution" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="research" property="research" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, education, degree, unit, institution, name, date, state, research
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.research.model.Vo.SocStatisticExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from soc_statistic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from soc_statistic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from soc_statistic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.research.model.Vo.SocStatisticExample" >
+    delete from soc_statistic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.research.model.Vo.SocStatistic" >
+    insert into soc_statistic (id, education, degree, 
+      unit, institution, name, 
+      date, state, research)
+    values (#{id,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{institution,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{date,jdbcType=DATE}, #{state,jdbcType=VARCHAR}, #{research,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.research.model.Vo.SocStatistic" >
+    insert into soc_statistic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="degree != null" >
+        degree,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="institution != null" >
+        institution,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="research != null" >
+        research,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="institution != null" >
+        #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="research != null" >
+        #{research,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.research.model.Vo.SocStatisticExample" resultType="java.lang.Integer" >
+    select count(*) from soc_statistic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update soc_statistic
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null" >
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.institution != null" >
+        institution = #{record.institution,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.research != null" >
+        research = #{record.research,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update soc_statistic
+    set id = #{record.id,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      institution = #{record.institution,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=DATE},
+      state = #{record.state,jdbcType=VARCHAR},
+      research = #{record.research,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.research.model.Vo.SocStatistic" >
+    update soc_statistic
+    <set >
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="institution != null" >
+        institution = #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="research != null" >
+        research = #{research,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.research.model.Vo.SocStatistic" >
+    update soc_statistic
+    set education = #{education,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      institution = #{institution,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      state = #{state,jdbcType=VARCHAR},
+      research = #{research,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

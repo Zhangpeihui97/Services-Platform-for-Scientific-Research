@@ -1,0 +1,122 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>项目结转</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/fonts/line-icons.css">
+    <link href="/static/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+
+</head>
+<body>
+<div class="app header-default side-nav-dark">
+    <div class="layout">
+        <!--顶部栏-->
+        <div th:replace="~{/topbar::topbar}">
+        </div>
+        <!--侧边栏-->
+        <div th:replace="~{/sidebar::sidebar}">
+        </div>
+        <!--主体部分-->
+        <div class="page-container">
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="card-title">项目结转</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form class="forms-sample" id="form" method="post" onsubmit="return f()">
+                                        <div class="form-inline">
+                                            <label >项目名称</label>
+                                            <p style="padding:10px;"></p>
+                                            <input type="text" class="form-control"  style="width:200px; height:30px;" name="name" >
+                                        </div>
+                                        <div class="form-inline">
+                                            <label >所属单位</label>
+                                            <p style="padding:10px;"></p>
+                                            <input type="text" class="form-control"  style="width:200px; height:30px;" name="institution">
+                                        </div>
+                                        <div class="form-inline">
+                                            <label >个人账号id</label>
+                                            <p style="padding:10px;"></p>
+                                            <input type="text" class="form-control"  style="width:200px; height:30px;" name="lid">
+                                        </div>
+                                        <div class="form-inline">
+                                            <label >学校账号id</label>
+                                            <p style="padding:10px;"></p>
+                                            <input type="text" class="form-control"  style="width:200px; height:30px;" name="sid">
+                                        </div>
+                                        <div class="form-inline">
+                                            <div class="form-group m-b-15"><label  >结转金额</label>
+                                                <p style="padding:10px;"></p>
+                                                <input type="text" class="form-control" style="width:100px; height:30px;" name="money">
+                                                <div class="input-group-addon">万元</div>
+                                            </div>
+                                            <p style="padding:50px;"></p>
+                                            <div class="form-group m-b-15"><label >结转日期</label>
+                                                <p style="padding:10px;"></p>
+                                                <input type="date" class="form-control"  style="width:150px; height:30px;" name="date">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-b-15">
+                                            <label >负责人</label>
+                                            <input type="text" class="form-control"  style="width:200px; height:30px;" name="leader">
+                                        </div>
+                                        <button type="submit" class="btn btn-common mr-3">保存</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="content-footer">
+                <div th:replace="~{/footer::footer}"></div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="/static/js/jquery-min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery.app.js"></script>
+<script src="/static/js/main.js"></script>
+<script type="text/javascript">
+    function f() {
+        var formData = new FormData($('#form')[0]);
+        $.ajax({
+            url:"/project/addOperate",
+            type:"post",
+            data:formData,
+            processData:false,
+            contentType:false,
+            success:function (result) {
+                if (result && result.success) {
+                    alert("提交成功");
+                    window.location.href = "/project/project_carried_over";
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+        return false;
+    }
+</script>
+</body>
+</html>

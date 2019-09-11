@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.research.dao.ProjectFundMapper" >
+  <resultMap id="BaseResultMap" type="com.research.model.Vo.ProjectFund" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="FId" property="fid" jdbcType="INTEGER" />
+    <result column="FMoney" property="fmoney" jdbcType="INTEGER" />
+    <result column="FTotalMoney" property="ftotalmoney" jdbcType="INTEGER" />
+    <result column="FPaymentUnit" property="fpaymentunit" jdbcType="VARCHAR" />
+    <result column="FDate" property="fdate" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="lever" property="lever" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="budget" property="budget" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="apply_time" property="applyTime" jdbcType="VARCHAR" />
+    <result column="institution" property="institution" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, FId, FMoney, FTotalMoney, FPaymentUnit, FDate, name, lever, number, leader, budget, 
+    start_time, end_time, apply_time, institution, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.research.model.Vo.ProjectFundExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from project_fund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.research.model.Vo.ProjectFundExample" >
+    delete from project_fund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.research.model.Vo.ProjectFund" >
+    insert into project_fund (id, FId, FMoney, 
+      FTotalMoney, FPaymentUnit, FDate, 
+      name, lever, number, 
+      leader, budget, start_time, 
+      end_time, apply_time, institution, 
+      state)
+    values (#{id,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{fmoney,jdbcType=INTEGER}, 
+      #{ftotalmoney,jdbcType=INTEGER}, #{fpaymentunit,jdbcType=VARCHAR}, #{fdate,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{lever,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{leader,jdbcType=VARCHAR}, #{budget,jdbcType=INTEGER}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{applyTime,jdbcType=VARCHAR}, #{institution,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.research.model.Vo.ProjectFund" >
+    insert into project_fund
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fid != null" >
+        FId,
+      </if>
+      <if test="fmoney != null" >
+        FMoney,
+      </if>
+      <if test="ftotalmoney != null" >
+        FTotalMoney,
+      </if>
+      <if test="fpaymentunit != null" >
+        FPaymentUnit,
+      </if>
+      <if test="fdate != null" >
+        FDate,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="lever != null" >
+        lever,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="leader != null" >
+        leader,
+      </if>
+      <if test="budget != null" >
+        budget,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="institution != null" >
+        institution,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fmoney != null" >
+        #{fmoney,jdbcType=INTEGER},
+      </if>
+      <if test="ftotalmoney != null" >
+        #{ftotalmoney,jdbcType=INTEGER},
+      </if>
+      <if test="fpaymentunit != null" >
+        #{fpaymentunit,jdbcType=VARCHAR},
+      </if>
+      <if test="fdate != null" >
+        #{fdate,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lever != null" >
+        #{lever,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="budget != null" >
+        #{budget,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="institution != null" >
+        #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.research.model.Vo.ProjectFundExample" resultType="java.lang.Integer" >
+    select count(*) from project_fund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project_fund
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fid != null" >
+        FId = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmoney != null" >
+        FMoney = #{record.fmoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftotalmoney != null" >
+        FTotalMoney = #{record.ftotalmoney,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpaymentunit != null" >
+        FPaymentUnit = #{record.fpaymentunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdate != null" >
+        FDate = #{record.fdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lever != null" >
+        lever = #{record.lever,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        leader = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.budget != null" >
+        budget = #{record.budget,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null" >
+        apply_time = #{record.applyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.institution != null" >
+        institution = #{record.institution,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project_fund
+    set id = #{record.id,jdbcType=INTEGER},
+      FId = #{record.fid,jdbcType=INTEGER},
+      FMoney = #{record.fmoney,jdbcType=INTEGER},
+      FTotalMoney = #{record.ftotalmoney,jdbcType=INTEGER},
+      FPaymentUnit = #{record.fpaymentunit,jdbcType=VARCHAR},
+      FDate = #{record.fdate,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      lever = #{record.lever,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      leader = #{record.leader,jdbcType=VARCHAR},
+      budget = #{record.budget,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
+      apply_time = #{record.applyTime,jdbcType=VARCHAR},
+      institution = #{record.institution,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

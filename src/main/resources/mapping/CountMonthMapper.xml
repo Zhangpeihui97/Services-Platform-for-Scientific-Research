@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.research.dao.CountMonthMapper" >
+  <resultMap id="BaseResultMap" type="com.research.model.Vo.CountMonth" >
+    <result column="imNum" property="imnum" jdbcType="DECIMAL" />
+    <result column="cNum" property="cnum" jdbcType="BIGINT" />
+    <result column="omNum" property="omnum" jdbcType="DECIMAL" />
+    <result column="pNum" property="pnum" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    imNum, cNum, omNum, pNum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.research.model.Vo.CountMonthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from count_month
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.research.model.Vo.CountMonthExample" >
+    delete from count_month
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.research.model.Vo.CountMonth" >
+    insert into count_month (imNum, cNum, omNum, 
+      pNum)
+    values (#{imnum,jdbcType=DECIMAL}, #{cnum,jdbcType=BIGINT}, #{omnum,jdbcType=DECIMAL}, 
+      #{pnum,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.research.model.Vo.CountMonth" >
+    insert into count_month
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imnum != null" >
+        imNum,
+      </if>
+      <if test="cnum != null" >
+        cNum,
+      </if>
+      <if test="omnum != null" >
+        omNum,
+      </if>
+      <if test="pnum != null" >
+        pNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imnum != null" >
+        #{imnum,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum != null" >
+        #{cnum,jdbcType=BIGINT},
+      </if>
+      <if test="omnum != null" >
+        #{omnum,jdbcType=DECIMAL},
+      </if>
+      <if test="pnum != null" >
+        #{pnum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.research.model.Vo.CountMonthExample" resultType="java.lang.Integer" >
+    select count(*) from count_month
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update count_month
+    <set >
+      <if test="record.imnum != null" >
+        imNum = #{record.imnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cnum != null" >
+        cNum = #{record.cnum,jdbcType=BIGINT},
+      </if>
+      <if test="record.omnum != null" >
+        omNum = #{record.omnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pnum != null" >
+        pNum = #{record.pnum,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update count_month
+    set imNum = #{record.imnum,jdbcType=DECIMAL},
+      cNum = #{record.cnum,jdbcType=BIGINT},
+      omNum = #{record.omnum,jdbcType=DECIMAL},
+      pNum = #{record.pnum,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

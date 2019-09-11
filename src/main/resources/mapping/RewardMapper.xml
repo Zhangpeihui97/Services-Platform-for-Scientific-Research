@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.research.dao.RewardMapper" >
+  <resultMap id="BaseResultMap" type="com.research.model.Vo.Reward" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="base_info" property="baseInfo" jdbcType="VARCHAR" />
+    <result column="base_class" property="baseClass" jdbcType="VARCHAR" />
+    <result column="base_result" property="baseResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, base_info, base_class, base_result
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.research.model.Vo.RewardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from reward
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reward
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.research.model.Vo.RewardExample" >
+    delete from reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.research.model.Vo.Reward" >
+    insert into reward (id, base_info, base_class, 
+      base_result)
+    values (#{id,jdbcType=INTEGER}, #{baseInfo,jdbcType=VARCHAR}, #{baseClass,jdbcType=VARCHAR}, 
+      #{baseResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.research.model.Vo.Reward" >
+    insert into reward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="baseInfo != null" >
+        base_info,
+      </if>
+      <if test="baseClass != null" >
+        base_class,
+      </if>
+      <if test="baseResult != null" >
+        base_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="baseInfo != null" >
+        #{baseInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="baseClass != null" >
+        #{baseClass,jdbcType=VARCHAR},
+      </if>
+      <if test="baseResult != null" >
+        #{baseResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.research.model.Vo.RewardExample" resultType="java.lang.Integer" >
+    select count(*) from reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update reward
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.baseInfo != null" >
+        base_info = #{record.baseInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseClass != null" >
+        base_class = #{record.baseClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseResult != null" >
+        base_result = #{record.baseResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update reward
+    set id = #{record.id,jdbcType=INTEGER},
+      base_info = #{record.baseInfo,jdbcType=VARCHAR},
+      base_class = #{record.baseClass,jdbcType=VARCHAR},
+      base_result = #{record.baseResult,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.research.model.Vo.Reward" >
+    update reward
+    <set >
+      <if test="baseInfo != null" >
+        base_info = #{baseInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="baseClass != null" >
+        base_class = #{baseClass,jdbcType=VARCHAR},
+      </if>
+      <if test="baseResult != null" >
+        base_result = #{baseResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.research.model.Vo.Reward" >
+    update reward
+    set base_info = #{baseInfo,jdbcType=VARCHAR},
+      base_class = #{baseClass,jdbcType=VARCHAR},
+      base_result = #{baseResult,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

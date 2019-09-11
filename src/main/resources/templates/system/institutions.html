@@ -1,0 +1,314 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>高校科研创新服务平台</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/fonts/line-icons.css">
+    <link href="/static/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+
+</head>
+<body>
+<div class="app header-default side-nav-dark">
+    <div class="layout">
+        <!--顶部栏-->
+        <div th:replace="~{/topbar::topbar}">
+        </div>
+        <!--侧边栏-->
+        <div th:replace="~{/sidebar::sidebar}">
+        </div>
+        <!--主体部分-->
+        <div class="page-container">
+
+            <div class="main-content">
+                <div class="container-fluid">
+
+                    <div class="breadcrumb-wrapper row">
+                        <div class="col-12 col-lg-3 col-md-6">
+                            <h4 class="page-title">研究机构</h4>
+                        </div>
+                        <!--
+                        <div class="col-12 col-lg-9 col-md-6">
+                            <ol class="breadcrumb float-right">
+                                <li><a href="#">Tables</a></li>
+                                <li class="active"> / Data Table</li>
+                            </ol>
+                        </div>
+                        -->
+                    </div>
+
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <span class="badge badge-default">研究机构列表</span>
+                                    <div class="row">
+                                        <div class="col-md-10"></div>
+                                        <button type="button" class="btn btn-common" data-toggle="modal" data-target="#addInstitution" >新增</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <!--<th>#</th>-->
+                                                <th>机构编号</th>
+                                                <th>机构名称</th>
+                                                <th>机构类型</th>
+                                                <th>平台简介</th>
+                                                <th>规章制度</th>
+                                                <th>仪器设备</th>
+                                                <th>开放交流</th>
+                                                <th>科研人员</th>
+                                                <th>纵向项目</th>
+                                                <th width="120px">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="institution:${institutions_list}">
+                                                <!--<td>1</td>-->
+                                                <td th:text="${institution.id}">001</td>
+                                                <td th:text="${institution.name}">数学与信息学院实验室</td>
+                                                <td th:text="${institution.type}">实验室</td>
+                                                <td th:text="${institution.introduction}">数学与信息学院实验室</td>
+                                                <td th:text="${institution.lule}">无</td>
+                                                <td th:text="${institution.device}">5</td>
+                                                <td th:text="${institution.communication}">数学与信息学院实验室</td>
+                                                <td th:text="${institution.userNum}">5</td>
+                                                <td th:text="${institution.projectNum}">5</td>
+                                                <td>
+                                                    <!--<button type="button" class="btn"><a href="/test/institutions_edit" style="color: black">编辑</a></button>-->
+                                                    <!--<button type="button" class="btn" data-toggle="modal" data-target="#deleteInstitution" >删除</button>-->
+                                                    <a th:href="@{'/system/institutions_edit_page?id='+${institution.id}}">
+                                                        <button type="button" class="btn">编辑</button>
+                                                    </a>
+                                                    <a >
+                                                        <button type="button" class="btn"
+                                                                th:onclick="f([[${institution.id}]]);">删除</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <footer class="content-footer">
+                    <div th:replace="~{/footer::footer}"></div>
+                </footer>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--新增-->
+<div class="modal fade" id="addInstitution" tabindex="-1" role="dialog" aria-labelledby="addInstitution" aria-hidden="true">
+    <div class="modal-dialog" style="width:420px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header px-4">
+                <h5 class="modal-title" id="addInstitutions">新增研究机构</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons ">关闭</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="form" onsubmit="return f2()" method="post">
+                    <div class="form-group">
+                        <label for="addInstitution_name">机构名称</label>
+                        <input type="text" class="form-control" id="addInstitution_name" placeholder="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="addInstitution_type">机构类型</label>
+                        <select class="form-control" id="addInstitution_type" name="type">
+                            <option>实验室</option>
+                            <option>研究基地</option>
+                            <option>研究中心</option>
+                            <option>工程中心</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="addInstitution_introduce">平台简介</label>
+                        <input type="text" class="form-control" id="addInstitution_introduce" placeholder="introduce" name="introduction">
+                    </div>
+                    <div class="form-group">
+                        <label for="addInstitution_rule">规章制度</label>
+                        <input type="text" class="form-control" id="addInstitution_rule" placeholder="rule" name="lule">
+                    </div>
+                    <div class="form-group">
+                        <label for="addInstitution_device">仪器设备</label>
+                        <input type="text" class="form-control" id="addInstitution_device" placeholder="device" name="device">
+                    </div>
+                    <div class="form-group">
+                        <label for="addInstitution_communication">开放交流</label>
+                        <input type="text" class="form-control" id="addInstitution_communication" placeholder="communication" name="communication">
+                    </div>
+                    <div class="modal-footer px-4">
+                        <button type="submit" class="btn btn-common">添加</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--编辑
+<div class="modal fade" id="modifyInstitution" tabindex="-1" role="dialog" aria-labelledby="modifyInstitution" aria-hidden="true">
+    <div class="modal-dialog" style="width:420px;" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <form>
+                    <div class="form-group">
+                        <label for="modifyInstitution_name">机构名称</label>
+                        <input type="text" class="form-control" id="modifyInstitution_name" placeholder="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="modifyInstitution_type">机构类型</label>
+                        <select class="form-control" id="modifyInstitution_type">
+                            <option>实验室</option>
+                            <option>研究基地</option>
+                            <option>研究中心</option>
+                            <option>工程中心</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modifyInstitution_information">基本信息</label>
+                        <input type="text" class="form-control" id="modifyInstitution_information" placeholder="information">
+                    </div>
+                    <div class="form-group">
+                        <label for="modifyInstitution_introduce">平台简介</label>
+                        <input type="text" class="form-control" id="modifyInstitution_introduce" placeholder="introduce">
+                    </div>
+                    <div class="form-group">
+                        <label for="modifyInstitution_rule">规章制度</label>
+                        <input type="text" class="form-control" id="modifyInstitution_rule" placeholder="rule">
+                    </div>
+                    <div class="form-group">
+                        <label for="modifyInstitution_device">仪器设备</label>
+                        <input type="text" class="form-control" id="modifyInstitution_device" placeholder="device">
+                    </div>
+                    <div class="form-group">
+                        <label for="modifyInstitution_communication">开放交流</label>
+                        <input type="text" class="form-control" id="modifyInstitution_communication" placeholder="communication">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer px-4">
+                <button type="button" class="btn btn-common">编辑</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!--删除-->
+<!--<div class="modal fade" id="deleteInstitution" tabindex="-1" role="dialog" aria-labelledby="deleteInstitution" aria-hidden="true">-->
+<!--<div class="modal-dialog" style="width:420px;" role="document">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header px-4">-->
+<!--<h5 class="modal-title" id="deleteInstitutions">删除研究机构</h5>-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--<span class="material-icons ">关闭</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<div class="modal-body p-4">-->
+<!--确认删除该组织？-->
+<!--</div>-->
+<!--<div class="modal-footer px-4">-->
+<!--<button type="button" class="btn btn-common">删除</button>-->
+<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<script src="/static/js/jquery-min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+<script src="/static/js/jquery.app.js"></script>
+<script src="/static/js/main.js"></script>
+
+<script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/static/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/static/plugins/datatables/jszip.min.js"></script>
+<script src="/static/plugins/datatables/pdfmake.min.js"></script>
+<script src="/static/plugins/datatables/vfs_fonts.js"></script>
+<script src="/static/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/static/plugins/datatables/buttons.print.min.js"></script>
+<script src="/static/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="/static/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/static/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<script src="/static/js/datatables.init.js"></script>
+
+<script type="text/javascript">
+    // $('header navbar').load('/static/head.html',function(responseTxt,statusTxt,xhr){
+    //        console.log('responseTxt,statusTxt,xhr');
+    // 		}
+    // )
+    function f(id) {
+        $.ajax({
+            url:"/system/deleteInstitutions",
+            type:"post",
+            data:JSON.stringify({
+                "id":id
+            }),
+            contentType:"application/json",
+            dataType:"json",
+            success:function (result) {
+                if (result && result.success) {
+                    alert("删除成功");
+                    location.reload();
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+        return false;
+    }
+
+    function f2() {
+        var formData = new FormData($('#form')[0]);
+        $.ajax({
+            url:"/system/addInstitution",
+            type:"post",
+            data:formData,
+            processData:false,
+            contentType:false,
+            success:function (result) {
+                if (result && result.success) {
+                    alert("提交成功");
+                    window.location.href = "/system/institutions_list";
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+        return false;
+    }
+
+</script>
+</body>
+</html>

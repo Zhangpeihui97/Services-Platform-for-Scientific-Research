@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>合同信息一览表</title>
+</head>
+<body>
+	<div class="app header-default side-nav-dark">
+		<div class="layout">
+
+			<!--侧边栏-->
+			<div class="side-nav expand-lg" th:fragment="sidebar">
+				<div class="side-nav-inner">
+					<ul class="side-nav-menu">
+						<li class="side-nav-header">
+							<span>科研管理系统</span>
+						</li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-dashboard"></i>
+								</span>
+                                <span class="title">工作首页</span>
+                                <span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+                            </a>
+                            <ul class="dropdown-menu sub-down">
+                                <li>
+                                    <a href="/test/home">首页</a>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu sub-down">
+                                <li>
+                                    <a href="/test/science">我的科研</a>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu sub-down">
+                                <li>
+                                    <a href="/system/message">消息与预警</a>
+                                </li>
+                            </ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/system/system_message">系统信息</a>
+								</li>
+							</ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-cloud"></i>
+								</span>
+                                <span class="title">科研队伍</span>
+                                <span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+                            </a>
+                            <ul class="dropdown-menu sub-down">
+                                <li>
+                                    <a href="/admin/user/list">科研人员</a>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu sub-down">
+                                <li>
+                                    <a href="/system/organization_list">组织机构</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-layers"></i>
+								</span>
+                                <span class="title">科研平台</span>
+                                <span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+                            </a>
+                            <ul class="dropdown-menu sub-down">
+                                <li>
+                                    <a href="/system/institutions_list">研究机构</a>
+                                </li>
+                            </ul>
+                        </li>
+						<li class="nav-item dropdown">
+							<a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-timer"></i>
+								</span>
+								<span class="title">科研项目</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/apply">项目立项</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/list">项目列表</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/audit">立项审核</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/change_audit">变更审核</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/inspection">项目中检</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/inspQuery">中检材料提交</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/closure">项目结项</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/cloQuery">项目结项材料提交</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/project_carry_over">项目待结转列表</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/project_carried_over">项目已结转列表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="dropdown-toggle" href="#">
+								<span class="icon-holder">
+									<i class="lni-package"></i>
+								</span>
+								<span class="title">资金管理</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/admin/fund/fund_page">资金到款</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/admin/fund/fund_list">到款到账</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/admin/fund/income">到账列表</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/admin/fund/outcome">资金支出</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/admin/fund/outcomeList">支出列表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-dashboard"></i>
+								</span>
+								<span class="title">横向项目</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/contract">合同列表</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/contract_audit">合同审核</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/project/contract_change_audit">合同变更审核</a>
+								</li>
+							</ul>
+						</li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-files"></i>
+								</span>
+                                <span class="title">科研成果</span>
+                                <span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+                            </a>
+                            <ul class="dropdown-menu sub-down">
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="title">论文成果</span>
+                                    </a>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/paper_list">论文列表</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/paper_add_page">新增论文</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/paper_audit">审核论文</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu sub-down">
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="title">研究报告</span>
+                                    </a>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/report_list">研究报告列表</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/report_add_page">新增研究报告</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/report_audit">审核研究报告</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu sub-down">
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="title">著作成果</span>
+                                    </a>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/achievement_list">著作成果列表</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/achievement_add_page">新增著作成果</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/achievement_audit">审核著作成果</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu sub-down">
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="title">鉴定成果</span>
+                                    </a>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/identification_list">鉴定成果列表</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/identification_add_page">新增鉴定成果</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/identification_audit">审核鉴定成果</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu sub-down">
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="title">艺术成果</span>
+                                    </a>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/artwork_list">艺术成果列表</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/artwork_add_page">新增艺术成果</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-menu sub-down">
+                                        <li>
+                                            <a href="/research/artwork_audit">审核艺术成果</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+						<li class="nav-item dropdown">
+							<a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-control-panel"></i>
+								</span>
+								<span class="title">知识产权</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li class="nav-item dropdown">
+									<a href="#" class="dropdown-toggle">
+										<span class="title">专利成果</span>
+									</a>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/patent_list">专利列表</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/patent_add_page">新增专利</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/patent_audit">审核专利</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li class="nav-item dropdown">
+									<a href="#" class="dropdown-toggle">
+										<span class="title">著作权</span>
+									</a>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/copyright_list">著作权列表</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/copyright_add_page">新增著作权</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/copyright_audit">审核著作权</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li class="nav-item dropdown">
+									<a href="#" class="dropdown-toggle">
+										<span class="title">标准</span>
+									</a>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/standard_list">标准列表</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/standard_add_page">新增标准</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/intellectual/standard_audit">审核标准</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-pie-chart"></i>
+								</span>
+								<span class="title">学术交流</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li class="nav-item dropdown">
+									<a href="#" class="dropdown-toggle">
+										<span class="title">主办会议</span>
+									</a>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/meeting_list">会议列表</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/meeting_add_page">新增会议</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/meeting_audit">审核会议</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li class="nav-item dropdown">
+									<a href="#" class="dropdown-toggle">
+										<span class="title">学术讲座</span>
+									</a>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/talk_list">讲座列表</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/talk_add_page">新增讲座</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/talk_audit">审核讲座</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li class="nav-item dropdown">
+									<a href="#" class="dropdown-toggle">
+										<span class="title">参加会议</span>
+									</a>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/ameeting_list">参加会议列表</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/ameeting_add_page">新增参加会议</a>
+										</li>
+									</ul>
+									<ul class="dropdown-menu sub-down">
+										<li>
+											<a href="/academic/ameeting_audit">审核参加会议</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="dropdown-toggle" href="#">
+								<span class="icon-holder">
+									<i class="lni-cloud"></i>
+								</span>
+								<span class="title">综合查询</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/sr/mul_query">综合查询</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="dropdown-toggle" href="#">
+								<span class="icon-holder">
+									<i class="lni-timer"></i>
+								</span>
+								<span class="title">统计报表</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/sr/basic">科技统计基础表</a>
+								</li>
+								<li>
+									<a href="/sr/summary">科技统计汇总表</a>
+								</li>
+								<li>
+									<a href="/sr/s_basic">社科统计基础表</a>
+								</li>
+								<li>
+									<a href="/sr/s_summary">社科统计汇总表</a>
+								</li>
+								<li>
+									<a href="/sr/sci">科研报表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a href="#" class="dropdown-toggle">
+								<span class="icon-holder">
+									<i class="lni-pie-chart"></i>
+								</span>
+								<span class="title">系统管理</span>
+								<span class="arrow">
+									<i class="lni-chevron-right"></i>
+								</span>
+							</a>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/admin/user/list">用户信息管理</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="/admin/user/audit">用户注册审核</a>
+								</li>
+							</ul>
+							<ul class="dropdown-menu sub-down">
+								<li>
+									<a href="user/modifyPW_page1">用户密码修改</a>
+								</li>
+							</ul>
+						</li>
+				</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+
+</body>
+
+<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
+</html>
